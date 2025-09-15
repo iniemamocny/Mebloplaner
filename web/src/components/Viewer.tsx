@@ -2,6 +2,10 @@ import React from 'react'
 
 export type View = '3d' | 'top' | 'back' | 'left' | 'right'
 
+function assertNever(x: never): never {
+  throw new Error(`Unexpected view: ${x}`)
+}
+
 interface ViewerProps {
   currentView: View
 }
@@ -19,6 +23,6 @@ export default function Viewer({ currentView }: ViewerProps) {
     case 'right':
       return <div data-testid="view-right">Right view placeholder</div>
     default:
-      return null
+      return assertNever(currentView)
   }
 }
