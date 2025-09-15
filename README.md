@@ -21,6 +21,13 @@ npm install
 npm run dev
 ```
 
-The `npm run dev` command launches the development server located in the `web/` directory.
+The `npm run dev` command starts the TypeScript server and the front‑end dev server concurrently.
+Changes to `src/index.ts` are picked up automatically because the server runs through `ts-node`.
+
+To launch only the server without the front‑end, run:
+
+```bash
+npm run server
+```
 
 
