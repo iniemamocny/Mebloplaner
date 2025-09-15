@@ -1,7 +1,13 @@
-import React, { useState } from 'react';
-import { mdiViewGrid, mdiViewAgenda, mdiCubeOutline } from '@mdi/js';
+import React from 'react';
+import {
+  mdiCubeOutline,
+  mdiArrowUp,
+  mdiArrowDown,
+  mdiArrowLeft,
+  mdiArrowRight,
+} from '@mdi/js';
 
-export type View = 'grid' | 'list' | '3d';
+export type View = '3d' | 'top' | 'back' | 'left' | 'right';
 
 interface ViewInfo {
   id: View;
@@ -10,14 +16,18 @@ interface ViewInfo {
 }
 
 const views: ViewInfo[] = [
-  { id: 'grid', icon: mdiViewGrid, title: 'Grid view' },
-  { id: 'list', icon: mdiViewAgenda, title: 'List view' },
   { id: '3d', icon: mdiCubeOutline, title: '3D view' },
+  { id: 'top', icon: mdiArrowUp, title: 'Top view' },
+  { id: 'back', icon: mdiArrowDown, title: 'Back view' },
+  { id: 'left', icon: mdiArrowLeft, title: 'Left view' },
+  { id: 'right', icon: mdiArrowRight, title: 'Right view' },
 ];
+interface ViewMenuProps {
+  currentView: View;
+  onViewChange: (view: View) => void;
+}
 
-export const ViewMenu: React.FC = () => {
-  const [currentView, setCurrentView] = useState<View>('grid');
-
+export const ViewMenu: React.FC<ViewMenuProps> = ({ currentView, onViewChange }) => {
   return (
     <div style={{ display: 'flex', gap: '0.5rem' }}>
       {views.map(({ id, icon, title }) => (
@@ -26,7 +36,7 @@ export const ViewMenu: React.FC = () => {
           width="24"
           height="24"
           viewBox="0 0 24 24"
-          onClick={() => setCurrentView(id)}
+          onClick={() => onViewChange(id)}
           style={{
             cursor: 'pointer',
             fill: currentView === id ? '#1976d2' : '#777',
