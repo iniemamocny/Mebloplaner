@@ -28,6 +28,22 @@ test('detects collision between walls', () => {
   assert.ok(checkCollision(wall1, wall2));
 });
 
+test('detects collision between overlapping walls', () => {
+  const wall1: Wall = {
+    start: { x: 0, y: 0 },
+    end: { x: 5, y: 0 },
+    height: 2.5,
+    thickness: 1,
+  };
+  const wall2: Wall = {
+    start: { x: 0, y: 0.4 },
+    end: { x: 5, y: 0.4 },
+    height: 2.5,
+    thickness: 1,
+  };
+  assert.ok(checkCollision(wall1, wall2));
+});
+
 test('detects lack of collision between walls', () => {
   const wall1: Wall = {
     start: { x: 0, y: 0 },

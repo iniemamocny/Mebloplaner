@@ -25,35 +25,57 @@ export function wallLength(wall: Wall): number {
   return Math.hypot(dx, dy);
 }
 
-function orientation(p: Point, q: Point, r: Point): number {
-  const val = (q.y - p.y) * (r.x - q.x) - (q.x - p.x) * (r.y - q.y);
-  if (val === 0) return 0;
-  return val > 0 ? 1 : 2;
-}
-
-function onSegment(p: Point, q: Point, r: Point): boolean {
-  return (
-    q.x <= Math.max(p.x, r.x) &&
-    q.x >= Math.min(p.x, r.x) &&
-    q.y <= Math.max(p.y, r.y) &&
-    q.y >= Math.min(p.y, r.y)
-  );
-}
-
 export function checkCollision(a: BaseElement, b: BaseElement): boolean {
-  const o1 = orientation(a.start, a.end, b.start);
-  const o2 = orientation(a.start, a.end, b.end);
-  const o3 = orientation(b.start, b.end, a.start);
-  const o4 = orientation(b.start, b.end, a.end);
+  const rect = (e: BaseElement): Point[] => {
+    const dx = e.end.x - e.start.x;
+    const dy = e.end.y - e.start.y;
+    const len = Math.hypot(dx, dy);
+    const half = e.thickness / 2;
+    if (len === 0) {
+      return [
+        { x: e.start.x - half, y: e.start.y - half },
+        { x: e.start.x + half, y: e.start.y - half },
+        { x: e.start.x + half, y: e.start.y + half },
+        { x: e.start.x - half, y: e.start.y + half },
+      ];
+    }
+    const ux = dx / len;
+    const uy = dy / len;
+    const px = -uy;
+    const py = ux;
+    return [
+      { x: e.start.x + px * half, y: e.start.y + py * half },
+      { x: e.start.x - px * half, y: e.start.y - py * half },
+      { x: e.end.x - px * half, y: e.end.y - py * half },
+      { x: e.end.x + px * half, y: e.end.y + py * half },
+    ];
+  };
 
-  if (o1 !== o2 && o3 !== o4) return true;
+  const project = (points: Point[], axis: Point): { min: number; max: number } => {
+    const dots = points.map((p) => p.x * axis.x + p.y * axis.y);
+    return { min: Math.min(...dots), max: Math.max(...dots) };
+  };
 
-  if (o1 === 0 && onSegment(a.start, b.start, a.end)) return true;
-  if (o2 === 0 && onSegment(a.start, b.end, a.end)) return true;
-  if (o3 === 0 && onSegment(b.start, a.start, b.end)) return true;
-  if (o4 === 0 && onSegment(b.start, a.end, b.end)) return true;
+  const A = rect(a);
+  const B = rect(b);
 
-  return false;
+  const axes: Point[] = [
+    { x: A[1].x - A[0].x, y: A[1].y - A[0].y },
+    { x: A[3].x - A[0].x, y: A[3].y - A[0].y },
+    { x: B[1].x - B[0].x, y: B[1].y - B[0].y },
+    { x: B[3].x - B[0].x, y: B[3].y - B[0].y },
+  ];
+
+  for (const axis of axes) {
+    const len = Math.hypot(axis.x, axis.y);
+    const unit = { x: axis.x / len, y: axis.y / len };
+    const projA = project(A, unit);
+    const projB = project(B, unit);
+    if (projA.max < projB.min || projB.max < projA.min) {
+      return false;
+    }
+  }
+  return true;
 }
 
 export function convertToLocal(point: Point, origin: Point): Point {
