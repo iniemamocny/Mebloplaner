@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node --test -r ts-node/register tests/geometry.spec.ts",
+    "test": "node --test -r ts-node/register tests/*.spec.ts",
     "build": "tsc",
     "lint": "eslint . --ext .ts"
   },
