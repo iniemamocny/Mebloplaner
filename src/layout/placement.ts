@@ -30,9 +30,8 @@ export function placeCabinets(room: Room, wallId: number, modules: Module[]): Pl
   const wall = room.walls[wallId];
   if (!wall) throw new Error('Wall not found');
 
-  const sorted = [...modules].sort((a, b) => b.width - a.width);
-  const totalWidth = sorted.reduce((sum, m) => sum + m.width, 0);
-  const totalSpacing = SPACING * (sorted.length + 1);
+  const totalWidth = modules.reduce((sum, m) => sum + m.width, 0);
+  const totalSpacing = SPACING * (modules.length + 1);
   const length = wallLength(wall);
 
   if (totalWidth + totalSpacing > length) {
@@ -49,7 +48,7 @@ export function placeCabinets(room: Room, wallId: number, modules: Module[]): Pl
 
   let cursor = SPACING;
   const placed: PlacedModule[] = [];
-  for (const mod of sorted) {
+  for (const mod of modules) {
     let start = cursor;
     let end = start + mod.width;
     let adjusted = true;
