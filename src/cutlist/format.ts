@@ -16,6 +16,9 @@ export interface Sheet {
 
 export function validateParts(parts: Part[], sheet: Sheet): void {
   for (const part of parts) {
+    if (part.width <= 0 || part.height <= 0) {
+      throw new Error('Part dimensions must be positive');
+    }
     if (part.width > sheet.width || part.height > sheet.height) {
       throw new Error('Part exceeds sheet dimensions');
     }

@@ -40,3 +40,15 @@ test('uses multiple sheets when necessary', () => {
     { sheet: 1, x: 80, y: 0 },
   ]);
 });
+
+test('throws error for non-positive part dimensions', () => {
+  const sheet: Sheet = { width: 100, height: 100 };
+  assert.throws(
+    () => validateParts([{ width: 0, height: 10 }], sheet),
+    /Part dimensions must be positive/
+  );
+  assert.throws(
+    () => validateParts([{ width: 10, height: -5 }], sheet),
+    /Part dimensions must be positive/
+  );
+});
