@@ -11,9 +11,24 @@ function App() {
   return (
     <div className="app">
       <TopMenu activeTab={activeTab} setActiveTab={setActiveTab} />
-      <ViewMenu currentView={currentView} setCurrentView={setCurrentView} />
-      <div className="viewer">
-        <Viewer currentView={currentView} />
+      <div className="content">
+        {activeTab === 'szafki' ? (
+          <>
+            <ViewMenu
+              currentView={currentView}
+              setCurrentView={setCurrentView}
+            />
+            <div className="viewer">
+              <Viewer currentView={currentView} />
+            </div>
+          </>
+        ) : (
+          <div className="tab-placeholder">
+            {activeTab === 'pomieszczenie' && 'Sekcja "Pomieszczenie" w przygotowaniu'}
+            {activeTab === 'koszt' && 'Sekcja "Koszt" w przygotowaniu'}
+            {activeTab === 'formatki' && 'Sekcja "Formatki" w przygotowaniu'}
+          </div>
+        )}
       </div>
     </div>
   )
