@@ -2,13 +2,14 @@ import { useState } from 'react'
 import './TopMenu.css'
 
 const tabs = [
-  { id: 'home', label: 'Home' },
-  { id: 'projects', label: 'Projects' },
-  { id: 'about', label: 'About' },
+  { id: 'szafki', label: 'Szafki' },
+  { id: 'pomieszczenie', label: 'Pomieszczenie' },
+  { id: 'koszt', label: 'Koszt' },
+  { id: 'formatki', label: 'Formatki' },
 ]
 
 export default function TopMenu() {
-  const [active, setActive] = useState('home')
+  const [active, setActive] = useState('szafki')
 
   return (
     <nav className="top-menu">
