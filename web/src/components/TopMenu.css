@@ -1,5 +1,7 @@
 .top-menu {
   display: flex;
+  justify-content: flex-start;
+  align-items: center;
   gap: 1rem;
 }
 
@@ -8,7 +10,7 @@
   text-decoration: none;
   color: #333;
   padding: 4px 0;
-  transition: color 0.3s;
+  transition: color 0.3s ease;
 }
 
 .menu-link::after {
@@ -21,7 +23,7 @@
   background: currentColor;
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 0.3s;
+  transition: transform 0.3s ease;
 }
 
 .menu-link:hover {
