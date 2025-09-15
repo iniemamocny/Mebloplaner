@@ -2,6 +2,11 @@
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
+After running `npm run dev` the application will be available at
+`http://localhost:5173/MebloPlaner/`. Alternatively you can set the
+`base` option in `vite.config.ts` to `'/'` to preview it locally at the
+root path.
+
 Currently, two official plugins are available:
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
