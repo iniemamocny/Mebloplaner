@@ -5,15 +5,17 @@
   gap: 1rem;
 }
 
-.menu-link {
+.menu-button {
   position: relative;
-  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
   color: #333;
   padding: 4px 0;
   transition: color 0.3s ease;
 }
 
-.menu-link::after {
+.menu-button::after {
   content: '';
   position: absolute;
   left: 0;
@@ -26,14 +28,14 @@
   transition: transform 0.3s ease;
 }
 
-.menu-link:hover {
+.menu-button:hover {
   color: #007bff;
 }
 
-.menu-link.active {
+.menu-button.active {
   color: #007bff;
 }
 
-.menu-link.active::after {
+.menu-button.active::after {
   transform: scaleX(1);
 }
