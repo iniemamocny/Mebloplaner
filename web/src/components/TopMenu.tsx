@@ -16,17 +16,16 @@ export default function TopMenu({ activeTab, setActiveTab }: TopMenuProps) {
   return (
     <nav className="top-menu">
       {tabs.map((tab) => (
-        <a
+        <button
           key={tab.id}
-          href="#"
-          className={`menu-link ${activeTab === tab.id ? 'active' : ''}`}
-          onClick={(e) => {
-            e.preventDefault()
+          type="button"
+          className={`menu-button ${activeTab === tab.id ? 'active' : ''}`}
+          onClick={() => {
             setActiveTab(tab.id)
           }}
         >
           {tab.label}
-        </a>
+        </button>
       ))}
     </nav>
   )
