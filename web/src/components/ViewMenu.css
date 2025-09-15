@@ -1,0 +1,28 @@
+.view-menu {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.view-button {
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.3s, border-color 0.3s;
+  border-bottom: 2px solid transparent;
+}
+
+.view-button img {
+  width: 24px;
+  height: 24px;
+}
+
+.view-button:hover {
+  opacity: 0.8;
+}
+
+.view-button.active {
+  opacity: 1;
+  border-bottom-color: #007bff;
+}
