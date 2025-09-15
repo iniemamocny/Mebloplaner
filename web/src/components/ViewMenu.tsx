@@ -29,8 +29,9 @@ export default function ViewMenu({ currentView, setCurrentView }: ViewMenuProps)
           key={view.id}
           className={`view-button ${currentView === view.id ? 'active' : ''}`}
           onClick={() => setCurrentView(view.id)}
+          aria-label={view.label}
         >
-          <img src={view.icon} alt={view.label} />
+          <img src={view.icon} alt="" aria-hidden="true" />
         </button>
       ))}
     </nav>
