@@ -6,7 +6,8 @@
   "scripts": {
     "test": "node --test -r ts-node/register tests/*.spec.ts",
     "build": "tsc",
-    "lint": "eslint . --ext .ts"
+    "lint": "eslint . --ext .ts",
+    "dev": "npm --prefix web run dev"
   },
   "keywords": [],
   "author": "",
