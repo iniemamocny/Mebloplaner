@@ -24,11 +24,11 @@ test('places modules on a simple wall', () => {
     { width: 0.75 },
   ];
   const placed = placeCabinets(room, 0, modules);
-  assert.deepStrictEqual(placed.map((m) => m.width), [1, 0.75, 0.5]);
+  assert.deepStrictEqual(placed.map((m) => m.width), [0.5, 1, 0.75]);
   const expectedPositions = [
     SPACING,
-    1 + 2 * SPACING,
-    1 + 0.75 + 3 * SPACING,
+    0.5 + 2 * SPACING,
+    0.5 + 1 + 3 * SPACING,
   ];
   const rounded = placed.map((m) => Number(m.x.toFixed(10)));
   assert.deepStrictEqual(rounded, expectedPositions);
