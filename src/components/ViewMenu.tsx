@@ -29,7 +29,7 @@ interface ViewMenuProps {
 
 export const ViewMenu: React.FC<ViewMenuProps> = ({ currentView, onViewChange }) => {
   return (
-    <div style={{ display: 'flex', gap: '0.5rem' }}>
+    <div className="view-menu">
       {views.map(({ id, icon, title }) => (
         <svg
           key={id}
@@ -39,7 +39,7 @@ export const ViewMenu: React.FC<ViewMenuProps> = ({ currentView, onViewChange })
           onClick={() => onViewChange(id)}
           style={{
             cursor: 'pointer',
-            fill: currentView === id ? '#1976d2' : '#777',
+            fill: currentView === id ? 'var(--primary)' : 'var(--muted)',
           }}
         >
           <title>{title}</title>
