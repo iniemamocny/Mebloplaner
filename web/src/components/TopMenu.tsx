@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import './TopMenu.css'
 
 const tabs = [
@@ -8,19 +7,22 @@ const tabs = [
   { id: 'formatki', label: 'Formatki' },
 ]
 
-export default function TopMenu() {
-  const [active, setActive] = useState('szafki')
+interface TopMenuProps {
+  activeTab: string
+  setActiveTab: (id: string) => void
+}
 
+export default function TopMenu({ activeTab, setActiveTab }: TopMenuProps) {
   return (
     <nav className="top-menu">
       {tabs.map((tab) => (
         <a
           key={tab.id}
           href="#"
-          className={`menu-link ${active === tab.id ? 'active' : ''}`}
+          className={`menu-link ${activeTab === tab.id ? 'active' : ''}`}
           onClick={(e) => {
             e.preventDefault()
-            setActive(tab.id)
+            setActiveTab(tab.id)
           }}
         >
           {tab.label}
